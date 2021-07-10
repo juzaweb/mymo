@@ -2,7 +2,7 @@
 
 namespace Mymo\Backend\Http\Controllers\Auth;
 
-use Mymo\Core\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;

@@ -2,7 +2,7 @@
 
 namespace Mymo\Backend\Http\Controllers\Auth;
 
-use Mymo\Core\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Mymo\Core\Models\PasswordReset;

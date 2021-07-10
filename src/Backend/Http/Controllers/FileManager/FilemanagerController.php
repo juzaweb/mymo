@@ -2,7 +2,7 @@
 
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
-use Mymo\Core\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 
 class FilemanagerController extends Controller

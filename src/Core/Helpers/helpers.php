@@ -92,20 +92,12 @@ function image_path($url) {
     return $img[0];
 }
 
-function is_url($string) {
-    if (empty($string)) {
+function is_url($url) {
+    if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
         return false;
     }
-    
-    if (substr($string, 0, 7) === 'http://') {
-        return true;
-    }
-    
-    if (substr($string, 0, 8) === 'https://') {
-        return true;
-    }
-    
-    return false;
+
+    return true;
 }
 
 function image_url($path) {
