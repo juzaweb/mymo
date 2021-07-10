@@ -29,7 +29,10 @@
                 English</a>
         </div>
     </div>
-    <div class="mymo__topbar__actionsDropdown dropdown mr-4 d-none d-sm-block">
+
+    @do_action('backend.menu_top')
+
+    {{--<div class="mymo__topbar__actionsDropdown dropdown mr-4 d-none d-sm-block">
         <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
             <i class="dropdown-toggle-icon fa fa-bell-o"></i>
         </a>
@@ -79,7 +82,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
 
     <div class="dropdown">
         <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="5,15">
