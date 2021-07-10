@@ -35,7 +35,11 @@
             <tr>
                 <th data-width="3%" data-field="state" data-checkbox="true"></th>
                 @foreach($columns as $key => $column)
-                    <th data-width="{{ $column['width'] ?? 'auto' }}" data-field="{{ $key }}">{{ $column['label'] ?? strtoupper($key) }}</th>
+                    <th
+                            data-width="{{ $column['width'] ?? 'auto' }}"
+                            data-align="{{ $column['align'] ?? 'left' }}"
+                            data-field="{{ $key }}">{{ $column['label'] ?? strtoupper($key) }}
+                    </th>
                 @endforeach
             </tr>
         </thead>

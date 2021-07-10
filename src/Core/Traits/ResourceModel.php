@@ -26,7 +26,7 @@ trait ResourceModel
      * @param array $params
      *
      * @return \Illuminate\Database\Eloquent\Builder
-     **/
+     */
     public function scopeWhereFilter($builder, $params = [])
     {
         if (empty($this->searchAttributes)) {
