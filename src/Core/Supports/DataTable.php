@@ -14,48 +14,43 @@
 
 namespace Mymo\Core\Supports;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Crypt;
 
-class DataTable
+abstract class DataTable
 {
-    protected $datatable;
+    /**
+     * Columns datatable
+     *
+     * @return array
+     */
+    abstract public function columns();
 
-    public function __construct(string $datatable)
+    /**
+     * Query data datatable
+     *
+     * @param Request $request
+     * @return Builder
+     */
+    abstract public function query(Request $request);
+
+    protected function bulkActions()
     {
-        $this->datatable = $datatable;
+        return [];
     }
 
-    public function jsonResponse()
+    public static function render()
     {
-        $request = request();
-        $sort = $request->get('sort', 'id');
-        $order = $request->get('order', 'desc');
-        $offset = $request->get('offset', 0);
-        $limit = $request->get('limit', 20);
+        $datatable = new static();
+        $uniqueId = 'mymo_'. Str::random(15);
 
-        $query = $this->makeData()->query();
-        $count = $query->count();
-        $query->orderBy($sort, $order);
-        $query->offset($offset);
-        $query->limit($limit);
-        $rows = $query->get();
-
-        return response()->json([
-            'total' => $count,
-            'rows' => $rows
-        ]);
-    }
-
-    public function render()
-    {
-        $datatable = $this->makeData();
         return view('mymo::components.datatable', [
-            'columns' => $datatable->columns()
+            'columns' => $datatable->columns(),
+            'actions' => $datatable->bulkActions(),
+            'unique_id' => $uniqueId,
+            'table' => Crypt::encryptString(static::class),
         ]);
-    }
-
-    protected function makeData()
-    {
-        return (new ($this->datatable));
     }
 }

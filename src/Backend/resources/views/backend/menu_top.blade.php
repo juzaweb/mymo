@@ -13,8 +13,8 @@
             </a>
 
             <div class="dropdown-menu" role="menu">
-                <a class="dropdown-item" href="{{ route('admin.posts.create') }}">@lang('mymo::app.post')</a>
-                <a class="dropdown-item" href="{{ route('admin.page.create') }}">@lang('mymo::app.page')</a>
+                {{--<a class="dropdown-item" href="{{ route('admin.posts.create') }}">@lang('mymo::app.post')</a>
+                <a class="dropdown-item" href="{{ route('admin.page.create') }}">@lang('mymo::app.page')</a>--}}
                 <a class="dropdown-item" href="{{ route('admin.users.create') }}">@lang('mymo::app.user')</a>
             </div>
         </div>

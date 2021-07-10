@@ -1,31 +1,50 @@
-<table class="table mymo-table">
-    <thead>
-        <tr>
-            @foreach($columns as $key => $column)
-            <th data-width="10%" data-field="{{ $key }}" data-formatter="thumbnail_formatter">{{ $column['label'] ?? '' }}</th>
-            @endforeach
-        </tr>
-    </thead>
-</table>
+<div class="row mb-3">
+    @if($actions)
+        <div class="col-md-4">
+            <form method="post" class="form-inline">
+                @csrf
+
+                <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
+                    <option value="">@lang('mymo::app.bulk_actions')</option>
+                    @foreach($actions as $key => $action)
+                        <option value="{{ $key }}">{{ $action['label'] ?? strtoupper($key) }}</option>
+                    @endforeach
+                </select>
+
+                <button type="submit" class="btn btn-primary mb-2" id="apply-action">@lang('mymo::app.apply')</button>
+            </form>
+        </div>
+    @endif
+
+    <div class="col-md-8">
+        <form method="get" class="form-inline" id="form-search">
+
+            <div class="form-group mb-2 mr-1">
+                <label for="search" class="sr-only">@lang('mymo::app.search')</label>
+                <input name="search" type="text" id="search" class="form-control" placeholder="@lang('mymo::app.search')" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo::app.search')</button>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive mb-5">
+    <table class="table" id="{{ $unique_id }}">
+        <thead>
+            <tr>
+                <th data-width="3%" data-field="state" data-checkbox="true"></th>
+                @foreach($columns as $key => $column)
+                    <th data-width="{{ $column['width'] ?? 'auto' }}" data-field="{{ $key }}">{{ $column['label'] ?? strtoupper($key) }}</th>
+                @endforeach
+            </tr>
+        </thead>
+    </table>
+</div>
 
 <script type="text/javascript">
-    function thumbnail_formatter(value, row, index) {
-        return '<img src="'+ row.thumb_url +'" class="w-100">';
-    }
-
-    function name_formatter(value, row, index) {
-        return '<a href="'+ row.edit_url +'">'+ value +'</a>';
-    }
-
-    function status_formatter(value, row, index) {
-        if (value == 1) {
-            return '<span class="text-success">@lang('mymo::app.enabled')</span>';
-        }
-        return '<span class="text-danger">@lang('mymo::app.disabled')</span>';
-    }
-
     var table = new MymoTable({
-        url: '{{ route('admin.posts.get-data') }}',
-        action_url: '{{ route('admin.posts.bulk-actions') }}',
+        table: "#{{ $unique_id }}",
+        url: '{{ route('admin.datatable.get-data') }}?table={{ urlencode($table) }}',
     });
 </script>

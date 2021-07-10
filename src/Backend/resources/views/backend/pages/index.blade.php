@@ -45,7 +45,6 @@
                 <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo::app.search')</button>
             </form>
         </div>
-
     </div>
 
     <div class="table-responsive mb-5">
