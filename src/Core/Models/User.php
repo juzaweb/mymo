@@ -14,42 +14,16 @@
 
 namespace Mymo\Core\Models;
 
+use App\User as BaseUser;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends BaseUser
 {
-    use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
         'avatar',
         'status'
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     public static function getAllStatus()
@@ -60,6 +34,7 @@ class User extends Authenticatable
             'banned' => trans('mymo::app.banned'),
         ];
     }
+
     /**
      * @param Builder $builder
      * @return Builder

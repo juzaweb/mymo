@@ -61,6 +61,14 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../../config/mymo.php' => base_path('config/mymo.php'),
         ], 'mymo_config');
+
+        $this->publishes([
+            __DIR__ . '/../../Backend/resources/views' => resource_path('vendor/mymocms/resources/views'),
+        ], 'mymo_views');
+
+        $this->publishes([
+            __DIR__ . '/../../Backend/resources/lang' => resource_path('vendor/mymocms/resources/lang'),
+        ], 'mymo_lang');
     }
 
     protected function registerProviders()
